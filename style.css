@@ -1,24 +1,181 @@
-@mixin centered($l, $r, $t, $b) {
-    position: absolute;
-    top: $t; bottom: $b;
-    left: $l; right: $r;
-    margin: auto;
+/** LOTS of magic numbers here. Proof of concept. Barely responsive. **/
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --move-x: 0deg;
+  --move-y: 0deg;
 }
 
 body {
-    background: #6F94A5;
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1504812333783-63b845853c20?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=7668266ab50622d9d6ebcc1a69cdb3e2");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.container {
-    @include centered(0, 0, 0, 0);
-    
-    svg {
-        width: 500px;
-        @include centered(0, 0, 0, 0);
-    }
+.scene {
+  width: 600px;
+  height: 897px;
+  margin: 20px auto;
+  padding: 0;
+  perspective: 600px;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  transform: scale(0.7) rotateY(var(--move-x)) rotateX(var(--move-y));
+  
+  @media screen and (max-width: 660px) {
+    width: 300px;
+    height: 448.5px;
+    perspective: 700px;
+  }
 }
 
-#Peter, #Gwen, #Noir, #_2099, #Silk {
-    visibility: hidden;
+.scene img {
+  width: 600px;
+  height: 897px;
+  
+  @media screen and (max-width: 660px) {
+    width: 300px;
+    height: 448.5px;
+  }
 }
-    
+
+.foreground {
+  max-width: 100%;
+  display: block;
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 0;
+  z-index: 2;
+  transform: scale(1.1) translateY(-50px);
+  transform-style: preserve-3d;
+}
+
+.logo {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  left: 0;
+  transform: translateZ(100px) translateY(-75px);
+  z-index: 2;
+  
+  @media screen and (max-width: 660px) {
+    transform: translateZ(150px) translateY(-40px) scale(0.7);
+  }
+}
+
+.base {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  left: 0;
+  transform: translateZ(-150px) scale(1.2) translateY(-50px);
+}
+
+.base-2 {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  left: 0;
+  transform: translateZ(-50px) translateY(-50px) scale(1.2);
+}
+
+.eyes {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  left: 0;
+  transform: translateZ(0px) translateY(-50px);
+}
+
+.profile {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  left: 0;
+  transform: translateZ(50px) translateY(-60px);
+}
+
+.frame {
+  width: calc(100% + 200px);
+  height: 0;
+  padding-top: 145.88%;
+  position: absolute;
+  left: -100px;
+  top: -140px;
+  transform: translateZ(50px);
+  border: 100px solid #ffffff;
+  transform-style: preserve-3d;
+
+  &:before {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    bottom: -100px;
+    top: -100px;
+    content: "";
+    display: block;
+    background: #ffffff;
+    left: -300px;
+    transform-origin: 100% 50%;
+    transform: rotateY(-60deg); // need this offset a bit, not a right angle
+  }
+
+  &:after {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    top: -100px;
+    right: -300px;
+    bottom: -100px;
+    content: "";
+    display: block;
+    background: #ffffff;
+    transform-origin: 0% 50%;
+    transform: rotateY(60deg);
+  }
+  
+  
+}
+
+.background {
+  position: absolute;
+  width: 140%;
+  height: 110%;
+  padding-top: 66%;
+  float: left;
+  background: #ff1747;
+  left: -20%;
+  top: -10%;
+  transform: translateZ(-165px) scale(1.2);
+}
+
+
+.credit {
+  position: fixed;
+  bottom: 1em;
+  width: 100%;
+  text-align: center;
+}
+
+.credit__link {
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  padding: 4px 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco",
+    "Helvetica Neue", Helvetica, Ubuntu, Roboto, Noto, "Segoe UI", Arial,
+    sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.2;
+  display: inline-block;
+  border-radius: 3px;
+}
