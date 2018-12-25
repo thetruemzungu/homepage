@@ -1,23 +1,24 @@
-body, html {
-  height: 100%;
-}
-.bg {
-  /* The image used */
-  background-image: url("./background.jpg");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+@mixin centered($l, $r, $t, $b) {
+    position: absolute;
+    top: $t; bottom: $b;
+    left: $l; right: $r;
+    margin: auto;
 }
 
-.body-text {
-  color: #F84600;
+body {
+    background: #6F94A5;
 }
 
-.enter-link {
-  
+.container {
+    @include centered(0, 0, 0, 0);
+    
+    svg {
+        width: 500px;
+        @include centered(0, 0, 0, 0);
+    }
 }
+
+#Peter, #Gwen, #Noir, #_2099, #Silk {
+    visibility: hidden;
+}
+    
