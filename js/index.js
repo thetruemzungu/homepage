@@ -6,8 +6,7 @@
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
     get period() {
-      var offset = -300;
-      var dateFuture = new Date(April 25, 2019 23:30:00);
+      var dateFuture = new Date(new Date().getFullYear() + 1, 0, 1);
       var dateNow = new Date();
       var seconds = Math.floor((dateFuture - (dateNow))/1000);
       var minutes = Math.floor(seconds/60);
@@ -17,10 +16,10 @@
       minutes = minutes-(days*24*60)-(hours*60);
       seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
       return {
-        year: new Date().getFullYear() + 1,
-        days: days,
-        hours: hours,
-        minutes: minutes,
+        year: 'endgame',
+        days: days - 250,
+        hours: hours-1,
+        minutes: minutes-30,
         seconds: seconds
       }
     },
@@ -34,8 +33,8 @@
     year: function(className) {
       var timeline = new TimelineMax();
       var year = animation.element(animation.newYear, "div", className);
-      for (var i=0; i<=String("EndGame").length-1; i++) {
-        var digit = animation.element(year, "div", "digit", String("EndGame").substr(i, 1));
+      for (var i=0; i<=String(animation.period.year).length-1; i++) {
+        var digit = animation.element(year, "div", "digit", String(animation.period.year).substr(i, 1));
         digit.style.top = (0 - (digit.clientHeight * 2)) + "px";
         timeline
           .to(digit, 0.5, {top: 0, opacity: 1, ease: Bounce.easeOut});
