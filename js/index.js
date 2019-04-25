@@ -35,8 +35,8 @@
     year: function(className) {
       var timeline = new TimelineMax();
       var year = animation.element(animation.newYear, "div", className);
-      for (var i=0; i<=String(animation.period.year).length-1; i++) {
-        var digit = animation.element(year, "div", "digit", String(animation.period.year).substr(i, 1));
+      for (var i=0; i<=String("EndGame").length-1; i++) {
+        var digit = animation.element(year, "div", "digit", String("EndGame").substr(i, 1));
         digit.style.top = (0 - (digit.clientHeight * 2)) + "px";
         timeline
           .to(digit, 0.5, {top: 0, opacity: 1, ease: Bounce.easeOut});
